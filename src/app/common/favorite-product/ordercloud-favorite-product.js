@@ -16,13 +16,26 @@ function FavoriteProductDirective(){
     };
 }
 
-function FavoriteProductController($scope, OrderCloud, Underscore, toastr, $state){
+function FavoriteProductController($scope, OrderCloud, Underscore, toastr){
     var vm = this;
     var hasFavorites = $scope.currentUser.xp && $scope.currentUser.xp.FavoriteProducts;
     vm.isFavorited = hasFavorites && $scope.currentUser.xp.FavoriteProducts.indexOf($scope.product.ID) > -1;
 
 
     vm.toggleFavoriteProduct = function(){
+        if (hasFavorites){
+            if (vm.isFavorited){
+                removeProduct();
+                console.log('Product Removed');
+            } else {
+                addProduct($scope.currentUser.xp.FavoriteProducts);
+                console.log('Product Added');
+            }
+
+        } else {
+            addProduct([]);
+            console.log('Favorites array added');
+        }
         function addProduct(existingList){
             existingList.push($scope.product.ID);
             OrderCloud.Me.Patch({xp: {FavoriteProducts: existingList}})
@@ -40,20 +53,7 @@ function FavoriteProductController($scope, OrderCloud, Underscore, toastr, $stat
                     toastr.success($scope.product.Name + ' was removed from your favorites');
                 });
         }
-        if (hasFavorites){
-            if (vm.isFavorited){
-                removeProduct();
-                console.log('Product Removed');
-            } else {
-                addProduct($scope.currentUser.xp.FavoriteProducts);
-                console.log('Product Added');
-            }
 
-        } else {
-            addProduct([]);
-            console.log('Favorites array added');
-        }
-        
     };
     
 }
