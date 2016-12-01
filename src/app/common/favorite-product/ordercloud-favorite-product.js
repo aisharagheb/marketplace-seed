@@ -26,15 +26,12 @@ function FavoriteProductController($scope, OrderCloud, Underscore, toastr){
         if (hasFavorites){
             if (vm.isFavorited){
                 removeProduct();
-                console.log('Product Removed');
             } else {
                 addProduct($scope.currentUser.xp.FavoriteProducts);
-                console.log('Product Added');
             }
 
         } else {
             addProduct([]);
-            console.log('Favorites array added');
         }
         function addProduct(existingList){
             existingList.push($scope.product.ID);
