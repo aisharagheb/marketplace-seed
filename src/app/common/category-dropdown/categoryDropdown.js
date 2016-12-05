@@ -16,7 +16,7 @@ function CategoryDropDownDirective(){
 
 
 
-function CategoryDropDownController(OrderCloud){
+function CategoryDropDownController(){
     var vm = this;
 }
 

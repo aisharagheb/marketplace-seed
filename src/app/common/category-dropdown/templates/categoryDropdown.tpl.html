@@ -3,8 +3,9 @@
         <a class="btn btn-block btn-default" uib-dropdown-toggle role="button">
             {{breadcrumb[0].Name || "Category Select"}}  <i class="fa fa-angle-down"></i>
         </a>
-        <ul class="dropdown-menu" uib-dropdown-menu prevent-click>
-            <li class="dropdown-header" ng-repeat="category in categoryList.Items">
+        <ul class="dropdown-menu" uib-dropdown-menu>
+            <!--{{categoryList.Items[1].ParentID}}-->
+            <li class="dropdown-header" ng-repeat="category in categoryList.Items | filter:{ParentID: null}">
                 <a ui-sref="productBrowse.products({categoryid: category.ID})" >
                     {{category.Name}}
                 </a>
@@ -12,3 +13,16 @@
         </ul>
     </nav>
 </div>
+
+<!--<ul class="dropdown-menu" uib-dropdown-menu>-->
+    <!--<li class="dropdown-header" ng-repeat="category in categoryList.Items | filter:{ParentID: null}">-->
+        <!--<a ui-sref="productBrowse.products({categoryid: category.ID})" >-->
+            <!--<ul class="dropdown-menu" uib-dropdown-menu>-->
+                <!--{{category.Name}}-->
+                <!--<li ng-repeat="category in categoryList.Items | filter:{ParentID: !null}">-->
+                    <!--{{category.Name}}-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</a>-->
+    <!--</li>-->
+<!--</ul>-->
