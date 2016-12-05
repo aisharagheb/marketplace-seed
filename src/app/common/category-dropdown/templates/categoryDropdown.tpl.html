@@ -1,11 +1,10 @@
 <div>
-    <nav class="visible-xs visible-sm" uib-dropdown>
+    <nav uib-dropdown>
         <a class="btn btn-block btn-default" uib-dropdown-toggle role="button">
             {{breadcrumb[0].Name || "Category Select"}}  <i class="fa fa-angle-down"></i>
         </a>
         <ul class="dropdown-menu" uib-dropdown-menu prevent-click>
-            <!--{{productBrowse.categoryList.Items[0].Name}}-->
-            <li class="dropdown-header" ng-repeat="category in productBrowse.categoryList.Items">
+            <li class="dropdown-header" ng-repeat="category in categoryDropdown.list.Items">
                 <a>
                     {{category.Name}}
                 </a>

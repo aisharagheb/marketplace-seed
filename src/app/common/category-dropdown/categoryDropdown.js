@@ -1,24 +1,32 @@
-angular.module('orderCloud')
+angular.module('ordercloud-dropdown', [])
     .directive('categoryDropDown', CategoryDropDownDirective)
     .controller('categoryDropDownCtrl', CategoryDropDownController);
 
 function CategoryDropDownDirective(){
     return {
         scope: {
-            currentUser: '='
+
         },
         restrict: 'E',
-        templateUrl: 'common/category-dropdown/templates/category-dropdown.tpl.html',
+        templateUrl: 'common/category-dropdown/templates/categoryDropdown.tpl.html',
         controller: 'categoryDropDownCtrl',
-        controllerAs: 'dropdown'
+        controllerAs: 'categoryDropdown'
     };
 }
 
-function CategoryDropDownController(OrderCloud){
+function CategoryDropDownController(){
     var vm = this;
 
-    OrderCloud.Me.ListCategories(null, 1, null, null, null, null, 'all').then(function(data){
-        vm.categories = data;
-        console.log('categories', vm.categories);
-    });
+
+    //function CategoriesList(){
+    //    vm.listCategories = [];
+    //    OrderCloud.Me.ListCategories(null, 1, null, null, null, null, 2).then(function(data){
+    //        vm.listCategories = data;
+    //        return vm.listCategories;
+    //    });
+    //}
+    //
+    //vm.list = CategoriesList();
+    //console.log('categories', vm.list);
 }
+
