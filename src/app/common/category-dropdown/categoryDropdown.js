@@ -14,15 +14,9 @@ function CategoryDropDownDirective(){
     };
 }
 
+
+
 function CategoryDropDownController(OrderCloud){
     var vm = this;
-
-
-    vm.categoriesList = function(){
-        OrderCloud.Me.ListCategories(null, 1, null, null, null, null, 2).then(function(data){
-            vm.listCategories = data;
-            return vm.listCategories;
-        });
-    };
 }
 

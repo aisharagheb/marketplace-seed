@@ -4,8 +4,8 @@
             {{breadcrumb[0].Name || "Category Select"}}  <i class="fa fa-angle-down"></i>
         </a>
         <ul class="dropdown-menu" uib-dropdown-menu prevent-click>
-            <li class="dropdown-header" ng-repeat="category in categoryDropdown.list.Items">
-                <a>
+            <li class="dropdown-header" ng-repeat="category in categoryList.Items">
+                <a ui-sref="productBrowse.products({categoryid: category.ID})" >
                     {{category.Name}}
                 </a>
             </li>
