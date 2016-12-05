@@ -5,19 +5,19 @@ angular.module('orderCloud')
 function CategoryDropDownDirective(){
     return {
         scope: {
-
+            currentUser: '='
         },
         restrict: 'E',
         templateUrl: 'common/category-dropdown/templates/category-dropdown.tpl.html',
-        controller: 'CategoryDropDownCtrl',
+        controller: 'categoryDropDownCtrl',
         controllerAs: 'dropdown'
     };
 }
 
-function CategoryDropDownController(OrderCloud, Parameters){
+function CategoryDropDownController(OrderCloud){
     var vm = this;
 
-    OrderCloud.Me.ListCategories(null, 1, 1, null, null, {ID:Parameters.categoryID}, 1).then(function(data){
+    OrderCloud.Me.ListCategories(null, 1, null, null, null, null, 'all').then(function(data){
         vm.categories = data;
         console.log('categories', vm.categories);
     });
