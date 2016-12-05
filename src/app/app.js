@@ -11,6 +11,7 @@ angular.module('orderCloud', [
     'toastr',
     'cgBusy',
     'jcs-autoValidate',
+    'ordercloud-dropdown',
     'ordercloud-infinite-scroll',
     'ordercloud-buyer-select',
     'ordercloud-catalog-select',
