@@ -3,17 +3,17 @@
         <a class="btn btn-block btn-default" uib-dropdown-toggle role="button">
             {{breadcrumb[0].Name || "Category Select"}}  <i class="fa fa-angle-down"></i>
         </a>
-        <ul class="dropdown-menu" uib-dropdown-menu>
-            <li class="dropdown-header" ng-repeat="category in categoryList.Items | filter:{ParentID: null}">
+        <ul class="dropdown-menu col-xs-6" uib-dropdown-menu>
+            <li class="dropdown-header" ng-repeat="category in categoryList.Items| filter:{ParentID: null}">
                 <nav uib-dropdown>
                     <a ui-sref="productBrowse.products({categoryid: category.ID})"
                        uib-dropdown-toggle role="button">
                         {{category.Name}} <i class="fa fa-angle-down" ng-if="category.ChildCount"></i>
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
-                        <!--<li ng-repeat="category in category.children">-->
-                            <!--{{category.Name}}-->
-                        <!--</li>-->
+                        <li ng-repeat="category in categoryList.Items| filter:{ParentID: ''}">
+                            {{category.Name}}
+                        </li>
                     </ul>
                 </nav>
             </li>
