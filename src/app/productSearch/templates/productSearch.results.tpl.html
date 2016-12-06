@@ -1,0 +1,72 @@
+<article>
+    <!-- Page Header -->
+    <div class="page-header">
+        <h3>Products</h3>
+    </div>
+    <!-- Sorting and Display Options -->
+    <div ng-if="productSearch.list.Items.length">
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <div class="text-right">
+                    <b>{{productSearch.list.Meta.ItemRange[0]  + ' - ' +  productSearch.list.Meta.ItemRange[1] + ' of ' + productSearch.list.Meta.TotalCount + ' results'}}</b><br>
+                    <div ng-if="productSearch.list.Meta.TotalPages > 1">
+                        Results per page:
+                        <select ng-model="productSearch.pageSizeSelection" ng-change="productSearch.updatePageSize(productSearch.pageSizeSelection)">
+                        <option selected="selected" value="{{productSearch.list.Meta.PageSize}}">{{productSearch.list.Meta.PageSize}}</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-sm-pull-6">
+                <div class="form-group">
+                    <div ng-class="{'input-group':productSearch.sortSelection}">
+                        <select class="form-control" ng-model="productSearch.sortSelection" ng-change="productSearch.updateSort(productSearch.sortSelection)">
+                            <option value="">Sort By</option>
+                            <option value="Name">Name</option>
+                            <option value="ID">ID</option>
+                        </select>
+                        <div ng-if="productSearch.sortSelection" class="input-group-btn">
+                            <button class="btn btn-default" ng-click="productSearch.reverseSort()">
+                                <i class="fa fa-sort"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product List -->
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="product in productSearch.list.Items">
+                <div class="product-item" ui-sref="productDetail({productid: product.ID})">
+                    <h3 class="item-name">{{product.Name || product.ID}}</h3>
+                    <p class="item-id" ng-if="product.Name">{{product.ID}}</p>
+                    <div class="thumbnail">
+                        <img class="img-responsive" ng-src="{{product.xp.image.URL || 'http://placehold.it/200x200'}}">
+                    </div>
+                    <div class="item-price">
+                        <p>{{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}} x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}}</p>
+                    </div>
+                    <div class="item-description" ng-if="product.Description">
+                        <p>{{product.Description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- No Results Found -->
+    <div ng-if="!productSearch.list.Items.length" class="well well-lg text-center">
+        <b><i class="fa fa-search"></i> No products or categories match your search.</b>
+    </div>
+    <!-- Pagination -->
+    <uib-pagination 
+        boundary-links="productSearch.list.Meta.TotalPages > 5" 
+        max-size="5" total-items="productSearch.list.Meta.TotalCount" 
+        items-per-page="productSearch.list.Meta.PageSize" 
+        ng-model="productSearch.list.Meta.Page" 
+        ng-change="productSearch.pageChanged(productSearch.list.Meta.Page)"
+        ng-if="productSearch.list.Meta.TotalPages > 1">
+    </uib-pagination>
+</article>

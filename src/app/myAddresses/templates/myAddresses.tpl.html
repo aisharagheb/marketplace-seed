@@ -1,0 +1,38 @@
+<article id="myAddresses">
+    <div class="page-header">
+        <button class="btn btn-success pull-right" ng-click="myAddresses.create()"><i class="fa fa-plus-circle"></i> Create New</button>
+        <h3>My Addresses</h3>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="address in myAddresses.list.Items">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{address.AddressName || address.ID}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="shippingID">Shipping</label>
+                            <input id="shippingID" type="checkbox" disabled ng-model="address.Shipping">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="billingID">Billing</label>
+                            <input id="billingID" type="checkbox" disabled ng-model="address.Billing">
+                        </div>
+                    </div>
+                    <hr>
+                    <p ng-bind-html="address | address:'full'"></p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <button class="btn btn-primary form-control" ng-click="myAddresses.edit(address)">Edit Address</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <button class="btn btn-danger form-control" ng-click="myAddresses.delete(address.ID)">Delete Address</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

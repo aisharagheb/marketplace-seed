@@ -1,0 +1,89 @@
+<div class="container">
+	<div class="oc-nav oc-flex-layout horizontal center wrap">
+		<!--BRAND-->
+		<div class="oc-nav-item oc-nav-item-brand">
+			<a ui-sref="home">
+				{{application.name}}
+			</a>
+		</div>
+
+		<!--PRODUCT / CATEGORY BROWSE-->
+		<div class="oc-nav-item oc-nav-item-browse">
+			<a ui-sref="productBrowse.products({page:'', favorites:'', sortBy:'', categoryid:''})"><i class="fa fa-th"></i> <span class="hidden-xs hidden-sm">Browse</span></a>
+		</div>
+
+		<!--PRODUCT SEARCH-->
+		<ordercloud-product-search class="oc-nav-item oc-nav-item-form hidden-xs hidden-sm"></ordercloud-product-search>
+		<div class="oc-nav-item oc-nav-item-search hidden-lg hidden-md">
+			<a href="" ng-click="base.mobileSearch()"><i class="fa fa-search"></i></a>
+		</div>
+
+		<div class="oc-nav-item oc-nav-item-spacer hidden-lg hidden-md"></div>
+
+		<!--CART-->
+		<div class="oc-nav-item oc-nav-item-cart">
+			<a ui-sref="cart"><i class="fa fa-shopping-cart"></i> <span class="sr-only">Shopping Cart</span> <span class="badge" ng-bind="base.currentOrder.LineItemCount"></span></a>
+		</div>
+
+		<!--ACCOUNT-->
+		<div class="oc-nav-item oc-nav-item-account" uib-dropdown ng-if="!base.currentUser.Anonymous">
+			<a uib-dropdown-toggle role="button"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm">Account</span> <span class="caret hidden-xs"></span></a>
+			<ul class="dropdown-menu-right" uib-dropdown-menu>
+				<li class="dropdown-header">{{base.currentUser.FirstName + ' ' + base.currentUser.LastName}}</li>
+				<li><a ui-sref="account">Account</a></li>
+				<li><a ui-sref="myAddresses">My Addresses</a></li>
+				<li class="divider"></li>
+				<li><a ng-click="application.logout()">Logout</a></li>
+			</ul>
+		</div>
+
+
+		<!--OTHER LINKS-->
+<!--		<div class="oc-nav-item">
+			<a href="">Link</a>
+		</div>
+		<div class="oc-nav-item">
+			<a href="">Link</a>
+		</div>
+		<div class="oc-nav-item">
+			<a href="">Link</a>
+		</div>-->
+	</div>
+</div>
+
+<!--<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#BASE_TOP_COLLAPSE" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="" ui-sref="home">{{application.name}}</a>
+        </div>
+
+        &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
+        <div class="collapse navbar-collapse" id="BASE_TOP_COLLAPSE">
+            <ul class="nav navbar-nav navbar-right">
+                <li uib-dropdown ng-if="!base.currentUser.Anonymous">
+                    <a href="#" uib-dropdown-toggle role="button"><i class="fa fa-user"></i> Account <span class="caret"></span></a>
+                    <ul uib-dropdown-menu>
+                        <li class="dropdown-header">{{base.currentUser.FirstName + ' ' + base.currentUser.LastName}}</li>
+                        <li><a href="" ui-sref="account">Account</a></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="application.logout()">Logout</a></li>
+                    </ul>
+                </li>
+                <li ng-if="base.currentUser.Anonymous && base.registrationAvailable">
+                    <a href="" ui-sref="registration" ui-sref-active="active">Register/Login</a>
+                </li>
+                <li>
+                    <a href="" ui-sref="cart"><i class="fa fa-shopping-cart"></i> <span class="sr-only">Shopping Cart</span> <span class="badge" ng-bind="base.currentOrder.LineItemCount"></span></a>
+                </li>
+            </ul>
+        </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;
+    </div>&lt;!&ndash; /.container &ndash;&gt;
+</nav>-->
+

@@ -1,0 +1,27 @@
+<article id="COMPONENT_FavoriteProducts" ui-view class="container-fluid">
+    <div class="no-matches" ng-if="!favoriteProducts.list">
+        <b>No matches found.</b>
+    </div>
+    <div ng-if="favoriteProducts.list.Items.length">
+        <div class="row">
+            <div class="col-sm-6 col-md-4" ng-repeat="product in favoriteProducts.list.Items">
+                <div class="product-list-item" ui-sref="productDetail({productid: product.ID})">
+                    <div class="thumbnail">
+                        <img class="img-responsive" ng-src="{{product.xp.image.URL || 'http://placehold.it/300x200'}}">
+                        <div class="caption">
+                            <div>
+                                <p class="pull-left" ng-if="product.Name">{{product.ID}}</p>
+                                <p class="pull-right"><b class="text-success">{{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}}</b> <small class="text-muted">x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}}</small></p>
+                                <div class="clearfix"></div>
+                            </div>
+                            <h4 class="text-center">{{product.Name || product.ID}}</h4>
+                            <div align="right" prevent-click>
+                                <ordercloud-favorite-product product="product" current-user="base.currentUser"></ordercloud-favorite-product>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

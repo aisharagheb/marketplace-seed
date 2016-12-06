@@ -1,0 +1,68 @@
+<article>
+    <!-- Category List -->
+    <div ng-if="categoryBrowse.categoryList.Items.length">
+        <h3 class="page-header">{{categoryBrowse.selectedCategory.Name || 'Categories' }}</h3>
+        <b class="pull-right">{{categoryBrowse.getNumberOfResults('categoryList')}}</b><br>
+        <div class="row">
+            <div class="col-md-4 col-lg-3" ng-repeat="category in categoryBrowse.categoryList.Items">
+                <!--TODO: @Spencer product-item can probably just be generic list item class -->
+                <div class="product-item" ng-click="categoryBrowse.updateCategoryList(category.ID)">
+                    <h3 class="item-name">{{category.Name || category.ID}}</h3>
+                    <p class="item-id" ng-if="category.Name">{{category.ID}}</p>
+                    <div class="thumbnail">
+                        <img class="img-responsive" ng-src="{{category.xp.image.URL || 'http://placehold.it/200x200?text=' + category.Name}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Category List Pagination -->
+    <uib-pagination 
+        boundary-links="categoryBrowse.categoryList.Meta.TotalPages > 5" 
+        max-size="5" total-items="categoryBrowse.categoryList.Meta.TotalCount" 
+        items-per-page="categoryBrowse.categoryList.Meta.PageSize" 
+        ng-model="categoryBrowse.categoryList.Meta.Page"
+        ng-change="categoryBrowse.changeCategoryPage(categoryBrowse.categoryList.Meta.Page)" 
+        ng-if="categoryBrowse.categoryList.Meta.TotalPages > 1">
+    </uib-pagination>
+    <!-- Product List -->
+    <div ng-if="categoryBrowse.productList.Items.length">
+        <h3 class="page-header">{{categoryBrowse.productList.Items.length > 1 ? 'Products' : 'Product'}}</h3>
+        <b class="pull-right">{{categoryBrowse.getNumberOfResults('productList')}}</b><br>
+        <div class="row">
+            <div class="col-md-4 col-lg-3" ng-repeat="product in categoryBrowse.productList.Items">
+                <div class="product-item" ui-sref="productDetail({productid: product.ID})">
+                    <h3 class="item-name">{{product.Name || product.ID}}</h3>
+                    <p class="item-id" ng-if="product.Name">{{product.ID}}</p>
+                    <div class="thumbnail">
+                        <img class="img-responsive" ng-src="{{product.xp.image.URL || 'http://placehold.it/200x200?text=' + product.Name}}">
+                    </div>
+                    <div class="item-price">
+                        <p>{{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}} x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}}</p>
+                    </div>
+                    <div class="item-description" ng-if="product.Description">
+                        <p>{{product.Description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product List Pagination -->
+    <uib-pagination 
+        boundary-links="categoryBrowse.productList.Meta.TotalPages > 5" 
+        max-size="5" total-items="categoryBrowse.productList.Meta.TotalCount" 
+        items-per-page="categoryBrowse.productList.Meta.PageSize" 
+        ng-model="categoryBrowse.productList.Meta.Page"
+        ng-change="categoryBrowse.changeProductPage(categoryBrowse.productList.Meta.Page)" 
+        ng-if="categoryBrowse.categoryList.Meta.TotalPages > 1">
+    </uib-pagination>
+    <!-- No Results -->
+    <div ng-if="!categoryBrowse.productList.Items.length && !categoryBrowse.categoryList.Items.length">
+        <div class="page-header">
+            <h3>No Results</h3>
+        </div>
+        <div class="well well-lg text-center">
+            <b> No products or categories</b>
+        </div>
+    </div>
+</article>

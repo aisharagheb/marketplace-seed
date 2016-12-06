@@ -1,0 +1,40 @@
+<article>
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ui-sref="productBrowse.products({categoryid:category.ID})">All Products</a>
+        </li>
+        <li ng-repeat="crumb in productBrowse.breadcrumb">
+            <a href="" ui-sref="productBrowse.products({categoryid:crumb.ID})">{{crumb.Name}}</a>
+        </li>
+    </ol>
+    <div class="row">
+
+        <!--TODO: Waiting for EX-980 to be complete for the catalog select directory-->
+        <!--<ordercloud-select-catalog></ordercloud-select-catalog>-->
+
+
+        <!--START CATEGORY TREE-->
+        <aside class="col-md-3 visible-md visible-lg">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b class="panel-title">Categories</b>
+                </div>
+                <category-tree tree="productBrowse.categoryList" active-category-id="productBrowse.parameters.categoryid"></category-tree>
+                <div class="panel-heading">
+                    <b class="panel-title">Refine By</b>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span ng-click="productBrowse.toggleFavorites()">
+                            <i class="fa" ng-class="{'fa-heart-o text-muted': !productBrowse.parameters.favorites, 'fa-heart text-danger': productBrowse.parameters.favorites}"></i> My Favorites
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!--END CATEGORY TREE-->
+
+        <!--PRODUCT LIST VIEW-->
+        <div class="col-md-9" ui-view></div>
+    </div>
+</article>

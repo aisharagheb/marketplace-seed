@@ -1,0 +1,16 @@
+<form name="OrderCloudProductSearch" ng-submit="$ctrl.onHardEnter($ctrl.searchTerm)">
+    <div class="form-group">
+        <input type="text"
+               class="form-control"
+               placeholder="Search Products..."
+               ng-model="$ctrl.searchTerm"
+               uib-typeahead="product as product.Name for product in $ctrl.searchResults"
+               disable-validation-message
+               typeahead-on-select="$ctrl.onSelect($item.ID)"
+               typeahead-focus-first="false"
+               typeahead-min-length="0"
+               typeahead-template-url="productSearch/templates/productSearch.typeahead.tpl.html"
+        />
+    </div>
+    <button class="sr-only" type="submit" value="Search"></button>
+</form>

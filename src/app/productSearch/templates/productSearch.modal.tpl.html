@@ -1,0 +1,25 @@
+<form name="OrderCloudProductSearch" id="OrderCloudProductSearch" autocomplete="off" autocorrect="off" ng-submit="$ctrl.onHardEnter($ctrl.searchTerm)">
+    <div class="oc-flex-layout horizontal gutter center no-wrap">
+        <div class="flex-grow">
+            <div class="form-group">
+                <label for="ProductSearchInput" class="sr-only">Search Products</label>
+                <input type="text"
+                       id="ProductSearchInput"
+                       class="form-control"
+                       placeholder="Search Products..."
+                       ng-model="$ctrl.searchTerm"
+                       uib-typeahead="product as product.Name for product in $ctrl.searchResults"
+                       typeahead-append-to="'#OrderCloudProductSearch'"
+                       typeahead-on-select="$ctrl.onSelect($item.ID)"
+                       typeahead-focus-first="false"
+                       typeahead-min-length="0"
+                       typeahead-template-url="productSearch/templates/productSearch.typeahead.tpl.html"
+                />
+            </div>
+            <button class="sr-only" type="submit" value="Search"></button>
+        </div>
+        <div ng-click="$ctrl.cancel()">
+            <i class="fa fa-times text-muted"></i>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,25 @@
+<div ng-class="{'has-feedback':product.QuantityMultiplier > 1}">
+    <label for="ProductQuantity" ng-bind="label"></label>
+    <input id="ProductQuantity"
+           name="ProductQuantity"
+           type="number"
+           ng-required="true"
+           ng-if="!product.StandardPriceSchedule.RestrictedQuantity"
+           class="form-control text-center"
+           ng-min="{{product.StandardPriceSchedule.MinQuantity}}"
+           ng-max="{{product.StandardPriceSchedule.MaxQuantity}}"
+           ng-model="product.Quantity"
+           placeholder="Quantity">
+    <select id="ProductQuantity"
+            name="ProductQuantity"
+            ng-required="true"
+            ng-if="product.StandardPriceSchedule.RestrictedQuantity"
+            class="form-control text-center"
+            ng-model="product.Quantity"
+            ng-options="priceBreak.Quantity as priceBreak.Quantity for priceBreak in product.StandardPriceSchedule.PriceBreaks"></select>
+    <div class="form-control-feedback" ng-show="product.QuantityMultiplier > 1">{{'x' + product.QuantityMultiplier}}</div>
+</div>
+
+
+
+
